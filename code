@@ -1,0 +1,22 @@
+!curl https://raw.githubusercontent.com/MicrosoftLearning/intropython/master/world_temp_mean.csv -o mean_temp.txt
+
+def run_weather():
+    mean_temp_text = open('mean_temp.txt', 'a+')
+    mean_temp_text.write('Rio de Janeiro,Brazil,30.0,18.0\n')
+    mean_temp_text.seek(0)
+    mean_temp_text.close()
+
+    mean_temp_text = open('mean_temp.txt', 'r+')
+
+    headings = mean_temp_text.readline()
+    headings = headings.split(',')
+    city_temp = mean_temp_text.readline()
+
+    while city_temp:
+        city_info = city_temp.split(',')
+        print(headings[0].title(), 'of', city_info[0].title(), headings[2], 'is', city_info[2], 'Celsius')
+        city_temp = mean_temp_text.readline()
+    
+    mean_temp_text.close()
+    
+run_weather()
